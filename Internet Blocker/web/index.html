@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Hot Internet Blocker</title>
+
+
+    <script type="text/javascript" src="/eel.js"></script>
+    <script src="js/jq.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap-clockpicker.min.js"></script>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/simple-sidebar.css">
+    <link rel="stylesheet" href="css/bootstrap-clockpicker.min.css">
+
+
+    <link rel="icon" href="imgs/newlogo.jpg"/>
+</head>
+
+<body>
+
+<div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading" onload="eel.get_all_devices()"></div>
+        <div class="list-group list-group-flush" id="devices">
+
+        </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <button class="btn btn-primary" id="menu-toggle"><img src="imgs/menu.png" style="width: 30px"/></button>
+        </nav>
+
+        <div class="container-fluid mt-4" id="addD" style="display: none">
+            <h1>הוספת מכשיר</h1>
+
+            <div class="input-group mb-3" style="width: 300px">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Name</span>
+                </div>
+                <input type="text" autocomplete="off" class="form-control" placeholder="Name" aria-label="Name"
+                       id="name">
+            </div>
+            <div class="input-group mb-3" style="width: 300px">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Mac</span>
+                </div>
+                <input type="text" autocomplete="off" class="form-control" id="mac" placeholder="Mac" aria-label="Mac">
+
+            </div>
+            <button class="btn btn-primary" onclick="addDevice()">הוסף מכשיר</button>
+        </div>
+        <div class="container-fluid mt-4" id="Device" style="display: none">
+            <h2 id="deviceName"></h2>
+            <input type="hidden" id="deviceMac">
+            <button class="btn btn-danger mt-2" id="blocker" onclick="blockDevice()">חסום אינטרנט</button>
+            <button class="btn btn-primary mt-2" id="unblocker" onclick="unblockDevice()">פתח אינטרנט</button>
+
+            <div class="input-group mb-1 mt-1" style="width: 300px">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">לחסום משעה:</span>
+                </div>
+                <input type="text" onchange="changeBlockTime()" autocomplete="off" class="form-control"
+                       placeholder="שעה" id="block_start">
+            </div>
+            <div class="input-group mb-1" style="width: 300px">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">לחסום עד שעה:</span>
+                </div>
+                <input type="text" onchange="changeBlockTime()" autocomplete="off" class="form-control"
+                       placeholder="שעה" id="block_end">
+            </div>
+
+            <button class="btn btn-warning mt-2" id="delete" onclick="deleteDevice()">מחק מכשיר</button>
+        </div>
+        <div class="container-fluid mt-4" id="my_body">
+
+            <h1 class="mt-4">Internet Blocker</h1>
+            <p>תוכנה זו נועדה על מנת לאפשר לכם לסגור את האינטרנט של הילד מבלי לגעת במחשבו או לנתק את האינטרנט של
+                כולם</p>
+            <h6>
+                Ⓒ<br/>התוכנה נוצרה ע"י הוד ועקנין
+                <br/>
+                hodvhelp@gmail.com
+            </h6>
+
+        </div>
+        <div class="container-fluid mt-4" id="settings" style="display: none">
+            <h1>הגדרות</h1>
+            <div class="input-group mb-3" style="width: 300px">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Username</span>
+                </div>
+                <input autocomplete="off" type="text" class="form-control" placeholder="Username" aria-label="Username"
+                       id="username">
+            </div>
+            <div class="input-group mb-3" style="width: 300px">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Password</span>
+                </div>
+                <input autocomplete="off" type="password" class="form-control" id="password">
+
+            </div>
+            <button class="btn btn-primary" onclick="updateSettings()">עדכן</button>
+
+        </div>
+
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<script>
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+
+
+    function setAllDevices(htmlcode) {
+        allnone();
+        document.getElementById("my_body").style.display = "block";
+        document.getElementById('devices').innerHTML = htmlcode;
+    }
+
+    eel.expose(setAllDevices);
+
+    function settings() {
+        allnone();
+        document.getElementById("settings").style.display = "block";
+        // $("#wrapper").toggleClass("toggled");
+
+    }
+
+    function updateSettings() {
+        eel.update_settings(document.getElementById("username").value, document.getElementById("password").value);
+        document.getElementById("username").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("settings").style.display = "none";
+        document.getElementById("my_body").style.display = "block";
+        alert("שם משתמש וסיסמה שונו בהצלחה");
+
+    }
+
+    function changeBlockTime() {
+        eel.change_block_time(document.getElementById('deviceMac').value, document.getElementById('block_start').value, document.getElementById('block_end').value);
+    }
+
+    function addDevice() {
+        eel.add_device(document.getElementById("name").value, document.getElementById("mac").value);
+        document.getElementById("name").value = "";
+        document.getElementById("mac").value = "";
+        alert("נוסף בהצלחה מכשיר");
+    }
+
+    function addDeviceWindow() {
+        allnone();
+        document.getElementById("addD").style.display = "block";
+        $("#wrapper").toggleClass("toggled");
+    }
+
+    function setDevice(name, mac, hasInternet, blockStart, blockEnd) {
+        allnone();
+        document.getElementById("Device").style.display = "block";
+        $("#wrapper").removeClass("toggled");
+
+        document.getElementById('deviceName').innerHTML = name;
+        document.getElementById('deviceMac').value = mac;
+        document.getElementById('block_start').value = blockStart;
+        document.getElementById('block_end').value = blockEnd;
+
+        if (hasInternet) {
+            document.getElementById('blocker').style.display = 'block';
+            document.getElementById('unblocker').style.display = 'none';
+        } else {
+            document.getElementById('blocker').style.display = 'none';
+            document.getElementById('unblocker').style.display = 'block';
+        }
+
+    }
+
+    eel.expose(setDevice);
+
+    function allnone() {
+        document.getElementById("addD").style.display = "none";
+        document.getElementById("my_body").style.display = "none";
+        document.getElementById("settings").style.display = "none";
+        document.getElementById("Device").style.display = "none";
+    }
+
+    function blockDevice() {
+        eel.close_internet(document.getElementById('deviceMac').value);
+    }
+
+    function unblockDevice() {
+
+        eel.open_internet(document.getElementById('deviceMac').value);
+
+    }
+
+    function deleteDevice() {
+        eel.delete_device(document.getElementById('deviceMac').value);
+        settings();
+    }
+</script>
+</body>
+</html>
