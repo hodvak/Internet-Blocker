@@ -1,4 +1,4 @@
-# Welcome to Box Internet Blocker
+# Welcome to Box Internet Blocker.
 
 **this project works only with Hot router(HOTBOX)**
 
