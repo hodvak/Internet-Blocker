@@ -27,5 +27,3 @@ how to use the program:
             * set the name as you remmember that this is that computer,and the mac as the pysical address(in 3 example its should be '12:34:56:78:9A:BC').
       3. Now you can disable/enable or choose time the program will disable/enable the child internet(the program must be open for this to work).
       
-And thats it.
-      
