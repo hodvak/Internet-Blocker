@@ -2,9 +2,9 @@
 
 **this project works only with Hot router(HOTBOX).**
 
-So what this project does is to enable perents block/unblock there child internet with a simple GUI at any time.
+What the program does is allow parents to turn off / turn on their children's internet from their computer
 
-how to use the program:
+How to use the program:
 1. Download the program from https://drive.google.com/file/d/1sy4VaacwPoecG8hZ3YFm9tUBJeciy6th/view?usp=sharing
 2. Open in your computer http://192.168.1.1/
       1. Log in with 'admin' as username and password.
