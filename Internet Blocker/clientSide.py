@@ -14,13 +14,13 @@ def start():
 @eel.expose
 def get_all_devices():
     devices = DataManager.get_all_devices()
-    htmlcode = '<a class="list-group-item list-group-item-action bg-light" onclick="settings()"><b>הגדרות</b></a>'
+    htmlcode = '<a class="list-group-item list-group-item-action bg-light" onclick="settings()"><b>Settings</b></a>'
     for device in devices:
         htmlcode += "<a class=\"list-group-item list-group-item-action bg-light\" onclick=\"eel.update_device('" + \
                     device[
                         'mac'] + "')\">" + device['name'] + "</a>"
     htmlcode += '<a class="list-group-item list-group-item-action bg-light" ' \
-                'style="color:#007bff;" onclick="addDeviceWindow()">הוספת מכשיר</a>'
+                'style="color:#007bff;" onclick="addDeviceWindow()">Add Device</a>'
     eel.setAllDevices(htmlcode)
 
 

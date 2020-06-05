@@ -21,9 +21,9 @@ how to use the program:
          Physical Address......:12-34-56-78-9A-BC
          ```
 4. Open the program on your computer.
-      1. Go to 'הגדרות'.
+      1. Go to 'Settings'.
             * set username to 'admin' and password to your new password (what you changed at 2).
-      2. Go to 'הוספת מכשיר'.
+      2. Go to 'Add Device'.
             * set the name as you remmember that this is that computer,and the mac as the pysical address(in 3 example its should be '12:34:56:78:9A:BC').
       3. Now you can disable/enable or choose time the program will disable/enable the child internet(the program must be open for this to work).
       

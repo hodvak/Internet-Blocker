@@ -45,7 +45,7 @@
         </nav>
 
         <div class="container-fluid mt-4" id="addD" style="display: none">
-            <h1>הוספת מכשיר</h1>
+            <h1>Add Device</h1>
 
             <div class="input-group mb-3" style="width: 300px">
                 <div class="input-group-prepend">
@@ -61,45 +61,33 @@
                 <input type="text" autocomplete="off" class="form-control" id="mac" placeholder="Mac" aria-label="Mac">
 
             </div>
-            <button class="btn btn-primary" onclick="addDevice()">הוסף מכשיר</button>
+            <button class="btn btn-primary" onclick="addDevice()">Add Device</button>
         </div>
         <div class="container-fluid mt-4" id="Device" style="display: none">
             <h2 id="deviceName"></h2>
             <input type="hidden" id="deviceMac">
-            <button class="btn btn-danger mt-2" id="blocker" onclick="blockDevice()">חסום אינטרנט</button>
-            <button class="btn btn-primary mt-2" id="unblocker" onclick="unblockDevice()">פתח אינטרנט</button>
+            <button class="btn btn-danger mt-2" id="blocker" onclick="blockDevice()">Block Internet</button>
+            <button class="btn btn-primary mt-2" id="unblocker" onclick="unblockDevice()">Unblock Internet</button>
 
             <div class="input-group mb-1 mt-1" style="width: 300px">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">לחסום משעה:</span>
+                    <span class="input-group-text">Block from</span>
                 </div>
                 <input type="text" onchange="changeBlockTime()" autocomplete="off" class="form-control"
-                       placeholder="שעה" id="block_start">
+                       placeholder="time" id="block_start">
             </div>
             <div class="input-group mb-1" style="width: 300px">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">לחסום עד שעה:</span>
+                    <span class="input-group-text">Unblock from</span>
                 </div>
                 <input type="text" onchange="changeBlockTime()" autocomplete="off" class="form-control"
-                       placeholder="שעה" id="block_end">
+                       placeholder="time" id="block_end">
             </div>
 
-            <button class="btn btn-warning mt-2" id="delete" onclick="deleteDevice()">מחק מכשיר</button>
+            <button class="btn btn-warning mt-2" id="delete" onclick="deleteDevice()">Delete Device</button>
         </div>
-        <div class="container-fluid mt-4" id="my_body">
-
-            <h1 class="mt-4">Internet Blocker</h1>
-            <p>תוכנה זו נועדה על מנת לאפשר לכם לסגור את האינטרנט של הילד מבלי לגעת במחשבו או לנתק את האינטרנט של
-                כולם</p>
-            <h6>
-                Ⓒ<br/>התוכנה נוצרה ע"י הוד ועקנין
-                <br/>
-                hodvhelp@gmail.com
-            </h6>
-
-        </div>
-        <div class="container-fluid mt-4" id="settings" style="display: none">
-            <h1>הגדרות</h1>
+        <div class="container-fluid mt-4" id="settings">
+            <h1>Settings</h1>
             <div class="input-group mb-3" style="width: 300px">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Username</span>
@@ -114,7 +102,7 @@
                 <input autocomplete="off" type="password" class="form-control" id="password">
 
             </div>
-            <button class="btn btn-primary" onclick="updateSettings()">עדכן</button>
+            <button class="btn btn-primary" onclick="updateSettings()">Update</button>
 
         </div>
 
@@ -130,8 +118,8 @@
 
 
     function setAllDevices(htmlcode) {
-        allnone();
-        document.getElementById("my_body").style.display = "block";
+        //allnone();
+        //document.getElementById("my_body").style.display = "block";
         document.getElementById('devices').innerHTML = htmlcode;
     }
 
@@ -148,9 +136,9 @@
         eel.update_settings(document.getElementById("username").value, document.getElementById("password").value);
         document.getElementById("username").value = "";
         document.getElementById("password").value = "";
-        document.getElementById("settings").style.display = "none";
-        document.getElementById("my_body").style.display = "block";
-        alert("שם משתמש וסיסמה שונו בהצלחה");
+        //document.getElementById("settings").style.display = "none";
+        // document.getElementById("my_body").style.display = "block";
+        alert("username and password successfully changed");
 
     }
 
@@ -162,19 +150,19 @@
         eel.add_device(document.getElementById("name").value, document.getElementById("mac").value);
         document.getElementById("name").value = "";
         document.getElementById("mac").value = "";
-        alert("נוסף בהצלחה מכשיר");
+        alert("device successfully added");
     }
 
     function addDeviceWindow() {
         allnone();
         document.getElementById("addD").style.display = "block";
-        $("#wrapper").toggleClass("toggled");
+        //$("#wrapper").toggleClass("toggled");
     }
 
     function setDevice(name, mac, hasInternet, blockStart, blockEnd) {
         allnone();
         document.getElementById("Device").style.display = "block";
-        $("#wrapper").removeClass("toggled");
+        //$("#wrapper").removeClass("toggled");
 
         document.getElementById('deviceName').innerHTML = name;
         document.getElementById('deviceMac').value = mac;
@@ -195,7 +183,7 @@
 
     function allnone() {
         document.getElementById("addD").style.display = "none";
-        document.getElementById("my_body").style.display = "none";
+        //.style.display = "none";
         document.getElementById("settings").style.display = "none";
         document.getElementById("Device").style.display = "none";
     }
