@@ -5,8 +5,8 @@
 What the program does is allow parents to turn off / turn on their children's internet from their computer
 
 How to use the program:
-1. Download the program from https://drive.google.com/file/d/1sy4VaacwPoecG8hZ3YFm9tUBJeciy6th/view?usp=sharing
-2. Open in your computer http://192.168.1.1/
+1. Download the program from https://drive.google.com/file/d/1sy4VaacwPoecG8hZ3YFm9tUBJeciy6th/view?usp=sharing .
+2. Open in your computer http://192.168.1.1/ .
       1. Log in with 'admin' as username and password.
       2. Go To Password and change your password to something only you know.
 3. go to your child's computer:
